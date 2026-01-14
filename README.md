@@ -1,2 +1,342 @@
-# CS
-CStrader
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trading Knowledge Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+function setMember(type) {
+    localStorage.setItem("memberType", type);
+    updateMembership();
+}
+
+function updateMembership() {
+    const type = localStorage.getItem("memberType") || "free";
+    document.getElementById("memberStatus").innerText =
+        "Current Membership: " + type.toUpperCase();
+
+    document.querySelectorAll(".premium").forEach(el => {
+        el.style.display = type === "premium" ? "table-row" : "none";
+    });
+}
+
+updateMembership();
+</script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+/* Top Bar */
+.top-bar {
+    background: #020617;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+.menu a {
+    color: #e5e7eb;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Ticker */
+.ticker-wrap {
+    background: #020617;
+    overflow: hidden;
+    border-top: 1px solid #1e293b;
+    border-bottom: 1px solid #1e293b;
+}
+
+.ticker {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.ticker span {
+    margin-right: 60px;
+    color: #22c55e;
+}
+
+/* Content */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    color: #38bdf8;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #020617;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+}
+
+.card h3 {
+    color: #38bdf8;
+}
+
+/* Chart */
+.chart-box {
+    margin-top: 40px;
+    background: #020617;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    background: #020617;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <div class="logo">Trading Knowledge</div>
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Forex</a>
+        <a href="#">Strategies</a>
+        <a href="#">Education</a>
+    </div>
+</div>
+
+<!-- Live Forex Ticker -->
+<div class="ticker-wrap">
+    <div class="ticker" id="forexTicker">
+        Loading live market data...
+    </div>
+</div>
+
+<div class="container">
+    <div class="hero">
+        <h1>Professional Trading Knowledge Platform</h1>
+        <p>Live Forex prices • Technical analysis • Risk management</p>
+    </div>
+<!-- Membership Section -->
+<div class="chart-box">
+    <h3>Membership Plans</h3>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px;">
+
+        <div class="card">
+            <h3 style="color:#22c55e;">Free Membership</h3>
+            <ul>
+                <li>✔ Free Forex Signals</li>
+                <li>✔ Market Analysis</li>
+                <li>✔ Telegram Channel Access</li>
+            </ul>
+            <button onclick="setMember('free')" style="margin-top:10px;">Join Free</button>
+        </div>
+
+        <div class="card">
+            <h3 style="color:#facc15;">Premium Membership</h3>
+            <ul>
+                <li>✔ All Free Features</li>
+                <li>✔ Premium Signals</li>
+                <li>✔ Risk Management Guide</li>
+                <li>✔ Priority Updates</li>
+            </ul>
+            <button onclick="setMember('premium')" style="margin-top:10px;">Upgrade</button>
+        </div>
+
+    </div>
+
+    <p id="memberStatus" style="margin-top:15px; color:#9ca3af;"></p>
+</div>
+
+
+    <div class="cards">
+        <div class="card">
+            <h3>Forex Market</h3>
+            <p>Learn how global currency markets move and react to news.</p>
+        </div>
+
+        <div class="card">
+            <h3>Technical Analysis</h3>
+            <p>Indicators, trends, support & resistance, price action.</p>
+        </div>
+
+        <div class="card">
+            <h3>Risk Management</h3>
+            <p>Protect capital with smart position sizing and discipline.</p>
+        </div>
+    </div><!-- Signals Dashboard -->
+<!-- Signals Dashboard -->
+<div class="chart-box">
+    <h3>Trading Signals</h3>
+
+    <table style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Pair</th>
+                <th>Signal</th>
+                <th>Entry</th>
+                <th>TP</th>
+                <th>SL</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- FREE SIGNALS -->
+            <tr>
+                <td>EUR/USD</td>
+                <td style="color:#22c55e;">BUY</td>
+                <td>1.0850</td>
+                <td>1.0895</td>
+                <td>1.0815</td>
+                <td>FREE</td>
+            </tr>
+
+            <tr>
+                <td>GBP/USD</td>
+                <td style="color:#ef4444;">SELL</td>
+                <td>1.2620</td>
+                <td>1.2565</td>
+                <td>1.2670</td>
+                <td>FREE</td>
+            </tr>
+
+            <!-- PREMIUM SIGNALS -->
+            <tr class="premium">
+                <td>XAU/USD</td>
+                <td style="color:#22c55e;">BUY</td>
+                <td>2028.50</td>
+                <td>2042.00</td>
+                <td>2019.00</td>
+                <td>PREMIUM</td>
+            </tr>
+
+            <tr class="premium">
+                <td>USD/JPY</td>
+                <td style="color:#ef4444;">SELL</td>
+                <td>148.20</td>
+                <td>147.40</td>
+                <td>148.80</td>
+                <td>PREMIUM</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="margin-top:10px; font-size:13px; color:#9ca3af;">
+        ⚠ Signals are for educational purposes only.
+    </p>
+</div>
+<!-- Telegram Join -->
+<div class="chart-box" style="text-align:center;">
+    <h3>Join Our Free Telegram Channel</h3>
+    <p>Get free signals, market updates & analysis.</p>
+
+    <a href="https://t.me/tradingwithck21" target="_blank"
+       style="display:inline-block; background:#229ED9; color:white;
+       padding:14px 25px; border-radius:30px; text-decoration:none;
+       font-weight:bold;">
+        🚀 Join Telegram Channel
+    </a>
+</div>
+
+    <!-- TradingView Chart -->
+    <div class="chart-box">
+        <h3>Live EUR/USD Chart</h3>
+        <div class="tradingview-widget-container">
+            <div id="tradingview_chart"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+© 2026 Trading Knowledge Hub | Educational Purpose Only
+</footer>
+
+<!-- Live Forex API -->
+<script>
+async function loadForex() {
+    const res = await fetch("https://api.exchangerate.host/latest?base=USD");
+    const data = await res.json();
+
+    const pairs = [
+        ["EUR/USD", (1 / data.rates.EUR).toFixed(4)],
+        ["GBP/USD", (1 / data.rates.GBP).toFixed(4)],
+        ["USD/JPY", data.rates.JPY.toFixed(2)],
+        ["AUD/USD", (1 / data.rates.AUD).toFixed(4)],
+        ["USD/CAD", data.rates.CAD.toFixed(4)]
+    ];
+
+    let html = "";
+    pairs.forEach(p => {
+        html += `<span>${p[0]} ${p[1]}</span>`;
+    });
+
+    document.getElementById("forexTicker").innerHTML = html;
+}
+
+loadForex();
+setInterval(loadForex, 60000);
+</script>
+
+<!-- TradingView Widget -->
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+new TradingView.widget({
+    "container_id": "tradingview_chart",
+    "width": "100%",
+    "height": 420,
+    "symbol": "FX:EURUSD",
+    "interval": "15",
+    "timezone": "Etc/UTC",
+    "theme": "dark",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#020617",
+    "enable_publishing": false,
+    "hide_side_toolbar": false,
+    "allow_symbol_change": true
+});
+</script>
+
+</body>
+</html>
+
